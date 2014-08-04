@@ -1,3 +1,9 @@
+# Convert .TDM and .TDMS files recorded with LabVIEW to .HDF5
+# Requires the cTDMS module which need the National Intruments C library
+# and therefore can only run in Windows
+#
+# T.Branco @ LMB August 2014
+
 import numpy as np
 import os
 import matplotlib.pylab as plt
