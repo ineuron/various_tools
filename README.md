@@ -1,4 +1,4 @@
 various_tools
 =============
 
-Isolated pieces of code the are/were or might be useful.
+Isolated pieces of code that are/were or might be useful.
