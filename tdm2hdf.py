@@ -2,6 +2,11 @@
 # Requires the cTDMS module which need the National Intruments C library
 # and therefore can only run in Windows
 #
+# NILIBDDC installation notes: 
+# If running 64 bit Windows, the 64 bit version of the library needs to be installed.
+# Copy nilibddc.lib from ./Dominonilibddc/dev/lib/64-bit/msvc64 and all the contents
+# of /Dominonilibddc/dev/bin/64-bit to the cTDMS site-packages directory
+
 # T.Branco @ LMB August 2014
 
 import numpy as np
