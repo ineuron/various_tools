@@ -53,7 +53,13 @@ for fname in os.listdir(filedir):
           f.create_group(str(groupname))
           for channelname in tdm.Groups[groupname]:
               data = tdm.Groups[groupname][channelname][:]
-              f.create_dataset('/'+str(groupname)+'/'+str(channelname), data=data)
+              dset = f.create_dataset('/'+str(groupname)+'/'+str(channelname), data=data)
+
+              # Add dataset attributes
+              for attr in tdm.attrs:
+                  if '_rate_kHz' in attrs: dset.attrs['dt'] = 1./tdm.attrs[attr]
+              dset.attrs['raw_data_file'] = fname.rstrip('.tdms') + '.hdf5'
+
 
         # Add attributes to H5 file
         for attr in tdm.attrs:
