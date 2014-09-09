@@ -86,9 +86,26 @@ void analog_write(int pin_number, int analog_value){
           analogWrite(DAC1, analog_value);
         }
       }
+      
+void pump_write(int pin_number, int analog_value){
+    /*
+	 * Performs an analog write on pin_number with the analog_value
+	 * The value must be range from 0 to 255
+     */
+        if (pin_number==0) {
+   	  analogWrite(DAC0, analog_value);
+          delay(1000);
+          analogWrite(DAC0, 4095);
+        }
+        else if (pin_number==1) {
+          analogWrite(DAC1, analog_value);
+          delay(1000);
+          analogWrite(DAC0, 4095);
+        }
+      }
 
 void setup() {
-    Serial.begin(9600); // Serial Port at 9600 baud
+    Serial.begin(115200); // Serial Port at 9600 baud
     Serial.setTimeout(100); // Instead of the default 1000ms, in order
                             // to speed up the Serial.parseInt() 
 }
@@ -114,7 +131,7 @@ void loop() {
         Serial.println(pin_number); 
         
         if (Serial.read()==':'){
-            delay(wait_for_transmission);
+            //delay(wait_for_transmission);
             value_to_write = Serial.parseInt(); // Collects the value to be written
             Serial.print("value_to_write:");
             Serial.println(value_to_write);
@@ -136,6 +153,8 @@ void loop() {
                    digital_write(pin_number, value_to_write);
                 } else if (mode == 'A'){ // Analog write
                     analog_write(pin_number, value_to_write);
+                } else if (mode == 'P'){ // pump write
+                    pump_write(pin_number, value_to_write);
                 } else {
                     break; // Unexpected mode
                 }
